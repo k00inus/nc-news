@@ -9,3 +9,9 @@ export const fetchArticles = () => {
     return data;
   });
 };
+
+export const getArticleById = (id) => {
+  return ncNews.get("/articles/" + id).then(({ data }) => {
+    return data.articles;
+  });
+};

@@ -4,24 +4,25 @@ import { AiFillLike } from "react-icons/ai";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
+  const [error, setError] = useState([]);
 
   useEffect(() => {
     fetchArticles()
-      .then(({ articles }) => {
+      .then((articles) => {
         setArticles(articles);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   }, []);
 
   return (
-    <div className="w-7/12 mx-auto">
+    <main className="w-7/12 mx-auto">
       {articles.length === 0 ? (
         <p className="text-center">Loading...</p>
       ) : (
         articles.map((article) => (
-          <main key={article.article_id} className="">
+          <article key={article.article_id} className="">
             <div className="flex ">
               <p>{article.author}</p>
               <p className="">.{article.created_at}.</p>
@@ -38,10 +39,10 @@ const Articles = () => {
               </p>
               <p className="">{article.comment_count} comments</p>
             </div>
-          </main>
+          </article>
         ))
       )}
-    </div>
+    </main>
   );
 };
 

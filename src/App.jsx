@@ -1,9 +1,11 @@
 import "./App.css";
+import "./index.css";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <>
-      <h1>Nc News</h1>
+      <Home />
     </>
   );
 }

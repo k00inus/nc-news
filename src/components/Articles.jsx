@@ -14,7 +14,7 @@ const Articles = () => {
         setArticles(articles);
       })
       .catch((err) => {
-        setError(err);
+        setError(err.response.data.msg);
       });
   }, []);
 
@@ -40,7 +40,11 @@ const Articles = () => {
               </div>
               <p className="my-1.5 text-xl">{article.title}</p>
               <div className=" my-2.5">
-                <img className="rounded" src={article.article_img_url} alt="" />
+                <img
+                  className="rounded"
+                  src={article.article_img_url}
+                  alt={article.title}
+                />
               </div>
             </Link>
             <div className="flex justify-between text-sm">

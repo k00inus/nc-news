@@ -1,5 +1,5 @@
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
-import { patchArticleById } from "./utils/utils";
+import { patchArticleById } from "../utils/utils";
 const UpdateLikes = ({ values: [article, setArticle] }) => {
   function handleLikes() {
     setArticle((prevData) => ({

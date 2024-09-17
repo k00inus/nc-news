@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  getArticleById,
-  getCommentsByArticleId,
-} from "../components/utils/utils";
-import { timeAgo } from "../components/utils/otherUtils";
+import { getArticleById, getCommentsByArticleId } from "../utils/utils";
+import { timeAgo } from "../utils/otherUtils";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import Header from "../components/Header";
 import NotFound from "./NotFound";
@@ -46,7 +43,6 @@ const Article = () => {
 
   return (
     <div>
-      <Header />
       <main className="w-9/12 mx-auto">
         {isLoading ? (
           <article className="w-7/12 mx-auto p-3 shadow-lg rounded-lg flex justify-center">

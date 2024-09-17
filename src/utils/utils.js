@@ -29,3 +29,9 @@ export const patchArticleById = (article, votes) => {
       return data.article;
     });
 };
+
+export const fetchUsers = () => {
+  return ncNews.get("/users").then(({ data }) => {
+    return data.users;
+  });
+};

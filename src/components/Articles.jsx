@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { fetchArticles } from "./utils/utils";
-import { timeAgo } from "./utils/otherUtils";
+import React, { useContext, useEffect, useState } from "react";
+import { fetchArticles } from "../utils/utils";
+import { timeAgo } from "../utils/otherUtils";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 const Articles = () => {
+  const { loggedIn, setLoggedIn } = useContext(UserContext);
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchArticles()
@@ -28,9 +31,16 @@ const Articles = () => {
         articles.map((article) => (
           <article
             key={article.article_id}
-            className="border-b-4 w-7/12 mx-auto p-3 shadow-lg rounded-lg hover:bg-slate-100"
+            className="border-b-4 w-7/12 mx-auto p-3 shadow-lg rounded-lg hover:bg-slate-100 "
           >
-            <Link to={`/pages/article/${article.article_id}`}>
+            <Link
+              to={loggedIn ? `article/${article.article_id}` : null}
+              onClick={() => {
+                !loggedIn
+                  ? alert("you must be logged in to read articles!")
+                  : null;
+              }}
+            >
               <p className="text-xs font-bold text-gray-500">
                 #{article.topic}
               </p>

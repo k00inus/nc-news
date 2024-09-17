@@ -9,3 +9,49 @@ body {
 header {
   border: none;
 }
+
+.dropbtn {
+  background-color: #0540f2;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  min-width: 90px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #8daef2;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.link {
+  color: #0540f2;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.link:hover {
+  background-color: #0540f2;
+  color: white;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #8daef2;
+  color: #0540f2;
+}

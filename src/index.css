@@ -3,7 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+body {
+  font-family: "Itim", cursive;
+}
 header {
   border: none;
 }

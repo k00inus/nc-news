@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { fetchArticles } from "./utils/utils";
-import { AiFillLike } from "react-icons/ai";
+import { fetchArticles, timeAgo } from "./utils/utils";
+import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const Articles = () => {
@@ -23,25 +23,31 @@ const Articles = () => {
         <p className="text-center">Loading...</p>
       ) : (
         articles.map((article) => (
-          <article key={article.article_id} className="">
+          <article
+            key={article.article_id}
+            className="border-b-4 w-7/12 mx-auto p-3 shadow-lg rounded-lg hover:bg-slate-100"
+          >
             <Link to={`/pages/article/${article.article_id}`}>
-              <div className="flex ">
-                <p>{article.author}</p>
-                <p className="">.{article.created_at}.</p>
-                <p className="">{article.topic}</p>
+              <p className="text-xs font-bold text-gray-500">
+                #{article.topic}
+              </p>
+              <div className="flex text-[11px] font-bold text-gray-500 ">
+                <p className="mr-2">{article.author}</p>
+                <p className="italic">{timeAgo(article.created_at)}.</p>
               </div>
-              <p className="">{article.title}</p>
-              <div className="">
-                <img src={article.article_img_url} alt="" />
-              </div>
-              <div className="flex justify-between">
-                <p className="flex text-blue-500">
-                  <AiFillLike />
-                  {article.votes}
-                </p>
-                <p className="">{article.comment_count} comments</p>
+              <p className="my-1.5 text-xl">{article.title}</p>
+              <div className=" my-2.5">
+                <img className="rounded" src={article.article_img_url} alt="" />
               </div>
             </Link>
+            <div className="flex justify-between text-sm">
+              <p className="flex  text-gray-500">
+                <AiFillLike className="mr-1 mt-[2px] text-blue-500 " />
+                {article.votes}
+                <AiFillDislike className="ml-1 mt-[2px] text-blue-500" />
+              </p>
+              <p className=" text-gray-500">{article.comment_count} comments</p>
+            </div>
           </article>
         ))
       )}

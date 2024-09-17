@@ -3,25 +3,30 @@ import { useParams } from "react-router-dom";
 import {
   getArticleById,
   getCommentsByArticleId,
-  timeAgo,
 } from "../components/utils/utils";
+import { timeAgo } from "../components/utils/otherUtils";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import Header from "../components/Header";
+import NotFound from "./NotFound";
 
 const Article = () => {
   const [article, setArticle] = useState([]);
   const [comments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState([]);
   const [commentError, setCommentError] = useState([]);
   const { id } = useParams();
 
   function getArticle() {
+    setIsLoading(true);
     getArticleById(id)
       .then((article) => {
         setArticle(article);
+        setIsLoading(false);
       })
       .catch((err) => {
-        setError(err);
+        setError(err.response.data.msg);
+        setIsLoading(false);
       });
   }
 
@@ -31,7 +36,7 @@ const Article = () => {
         setComments(comments);
       })
       .catch((err) => {
-        setCommentError(err);
+        setCommentError(err.response.data.msg);
       });
   }
 
@@ -42,8 +47,12 @@ const Article = () => {
     <div>
       <Header />
       <main className="w-9/12 mx-auto">
-        {article.length === 0 ? (
-          <p className="text-center">Loading...</p>
+        {isLoading ? (
+          <article className="w-7/12 mx-auto p-3 shadow-lg rounded-lg flex justify-center">
+            <iframe src="https://lottie.host/embed/92d9ca28-0c6e-4810-a00d-429e657f401a/S9v2O6kwum.json"></iframe>
+          </article>
+        ) : error.length > 0 ? (
+          <NotFound error={error} />
         ) : (
           article.map((a) => (
             <article
@@ -75,8 +84,10 @@ const Article = () => {
           ))
         )}
 
-        {comments.length === 0 ? (
-          <p className="text-center">Loading...</p>
+        {isLoading ? (
+          <article className="w-7/12 mx-auto p-3 shadow-lg rounded-lg flex justify-center">
+            <iframe src="https://lottie.host/embed/92d9ca28-0c6e-4810-a00d-429e657f401a/S9v2O6kwum.json"></iframe>
+          </article>
         ) : (
           comments.map((comment) => (
             <article

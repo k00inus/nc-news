@@ -8,9 +8,10 @@ import { timeAgo } from "../components/utils/otherUtils";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import Header from "../components/Header";
 import NotFound from "./NotFound";
+import UpdateLikes from "../components/UpdateLikes";
 
 const Article = () => {
-  const [article, setArticle] = useState([]);
+  const [article, setArticle] = useState({});
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState([]);
@@ -53,35 +54,31 @@ const Article = () => {
           </article>
         ) : error.length > 0 ? (
           <NotFound error={error} />
+        ) : article ? (
+          <article className="w-8/12 mx-auto border-b-4 p-4">
+            <p className="font-bold text-gray-500">#{article.topic}</p>
+            <div className="flex text-sm font-bold text-gray-500 ">
+              <p className="mr-2">{article.author}</p>
+              <p className="">{timeAgo(article.created_at)}</p>
+            </div>
+
+            <p className="mt-2.5 text-xl">{article.title}</p>
+            <div className="">
+              <img
+                className="w-full rounded-md my-5"
+                src={article.article_img_url}
+                alt={article.title}
+              />
+            </div>
+            <div className="flex justify-between text-sm">
+              <UpdateLikes values={[article, setArticle]} />
+              <p className="">{article.comment_count} comments</p>
+            </div>
+          </article>
         ) : (
-          article.map((a) => (
-            <article
-              key={a.article_id}
-              className="w-8/12 mx-auto border-b-4 p-4"
-            >
-              <p className="font-bold text-gray-500">#{a.topic}</p>
-              <div className="flex text-sm font-bold text-gray-500 ">
-                <p className="mr-2">{a.author}</p>
-                <p className="">{timeAgo(a.created_at)}</p>
-              </div>
-              <p className="mt-2.5 text-xl">{a.title}</p>
-              <div className="">
-                <img
-                  className="w-full rounded-md my-5"
-                  src={a.article_img_url}
-                  alt=""
-                />
-              </div>
-              <div className="flex justify-between text-sm">
-                <p className="flex text-gray-500">
-                  <AiFillLike className="mr-1 mt-[2px] text-blue-500" />
-                  {a.votes}
-                  <AiFillDislike className="ml-1 mt-[2px] text-blue-500" />
-                </p>
-                <p className="">{a.comment_count} comments</p>
-              </div>
-            </article>
-          ))
+          <article className="w-7/12 mx-auto p-3 shadow-lg rounded-lg flex justify-center">
+            <iframe src="https://lottie.host/embed/92d9ca28-0c6e-4810-a00d-429e657f401a/S9v2O6kwum.json"></iframe>
+          </article>
         )}
 
         {isLoading ? (

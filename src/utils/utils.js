@@ -41,3 +41,7 @@ export const postComment = (id, comment) => {
     return data.comment;
   });
 };
+
+export const deleteComment = (id) => {
+  return ncNews.delete(`/comments/${id}`);
+};

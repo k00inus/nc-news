@@ -35,3 +35,9 @@ export const fetchUsers = () => {
     return data.users;
   });
 };
+
+export const postComment = (id, comment) => {
+  return ncNews.post(`/articles/${id}/comments`, comment).then(({ data }) => {
+    return data.comment;
+  });
+};

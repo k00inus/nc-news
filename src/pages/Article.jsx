@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById, getCommentsByArticleId } from "../utils/utils";
+import { getArticleById } from "../utils/utils";
 import { timeAgo } from "../utils/otherUtils";
-import { AiFillLike, AiFillDislike } from "react-icons/ai";
-import Header from "../components/Header";
 import NotFound from "./NotFound";
 import UpdateLikes from "../components/UpdateLikes";
+import CommentList from "../components/CommentList";
+import Loading from "../components/Loading";
 
 const Article = () => {
   const [article, setArticle] = useState({});
-  const [comments, setComments] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState([]);
-  const [commentError, setCommentError] = useState([]);
-  const { id } = useParams();
+
+  const { id, username } = useParams();
 
   function getArticle() {
     setIsLoading(true);
@@ -28,26 +28,13 @@ const Article = () => {
       });
   }
 
-  function getComments() {
-    getCommentsByArticleId(id)
-      .then((comments) => {
-        setComments(comments);
-      })
-      .catch((err) => {
-        setCommentError(err.response.data.msg);
-      });
-  }
-
   useEffect(getArticle, []);
-  useEffect(getComments, []);
 
   return (
     <div>
       <main className="w-9/12 mx-auto">
         {isLoading ? (
-          <article className="w-7/12 mx-auto p-3 shadow-lg rounded-lg flex justify-center">
-            <iframe src="https://lottie.host/embed/92d9ca28-0c6e-4810-a00d-429e657f401a/S9v2O6kwum.json"></iframe>
-          </article>
+          <Loading />
         ) : error.length > 0 ? (
           <NotFound error={error} />
         ) : article ? (
@@ -72,35 +59,10 @@ const Article = () => {
             </div>
           </article>
         ) : (
-          <article className="w-7/12 mx-auto p-3 shadow-lg rounded-lg flex justify-center">
-            <iframe src="https://lottie.host/embed/92d9ca28-0c6e-4810-a00d-429e657f401a/S9v2O6kwum.json"></iframe>
-          </article>
+          <Loading />
         )}
 
-        {isLoading ? (
-          <article className="w-7/12 mx-auto p-3 shadow-lg rounded-lg flex justify-center">
-            <iframe src="https://lottie.host/embed/92d9ca28-0c6e-4810-a00d-429e657f401a/S9v2O6kwum.json"></iframe>
-          </article>
-        ) : (
-          comments.map((comment) => (
-            <article
-              key={comment.comment_id}
-              className="w-8/12 mx-auto p-4 shadow-lg rounded-md"
-            >
-              <div className="flex text-gray-500 text-sm">
-                <p className="font-bold mr-3">{comment.author}</p>
-                <p className="">{timeAgo(comment.created_at)}</p>
-              </div>
-              <p className="my-3 bg-slate-100 p-4 rounded-lg">{comment.body}</p>
-
-              <p className="flex text-gray-500 text-sm">
-                <AiFillLike className="mr-1 mt-[2px] text-blue-500" />
-                {comment.votes}
-                <AiFillDislike className="ml-1 mt-[2px] text-blue-500" />
-              </p>
-            </article>
-          ))
-        )}
+        {isLoading ? null : <CommentList />}
       </main>
     </div>
   );

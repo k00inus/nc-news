@@ -2,14 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { fetchArticles } from "../utils/utils";
 import { timeAgo } from "../utils/otherUtils";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
 const Articles = () => {
   const { loggedIn, setLoggedIn } = useContext(UserContext);
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchArticles()

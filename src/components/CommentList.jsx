@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import PostComment from "./PostComment";
 import { UserContext } from "../contexts/UserContext";
 import Loading from "./Loading";
+import { deleteComment } from "../utils/utils";
 
 const CommentList = () => {
   const { loggedIn } = useContext(UserContext);
@@ -21,6 +22,15 @@ const CommentList = () => {
       .catch((err) => {
         setCommentError(err.response.data.msg);
       });
+  }
+
+  function handleDelete(id) {
+    const confirm = window.confirm("Do you want to delete this comment?");
+    if (confirm) {
+      deleteComment(id).catch((err) => {
+        alert(err.response.data.msg);
+      });
+    }
   }
 
   useEffect(getComments, [comments]);
@@ -48,6 +58,14 @@ const CommentList = () => {
                     {comment.votes}
                     <AiFillDislike className="ml-1 mt-[2px] text-blue-500" />
                   </p>
+                  {loggedIn && username === comment.author ? (
+                    <button
+                      className="bg-[#0540F2] hover:bg-[#8DAEF2] hover:text-[#0540F2] py-1 px-2 rounded-md text-white"
+                      onClick={(e) => handleDelete(comment.comment_id)}
+                    >
+                      Delete
+                    </button>
+                  ) : null}
                 </div>
               </article>
             ))

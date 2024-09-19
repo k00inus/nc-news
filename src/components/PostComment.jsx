@@ -6,7 +6,7 @@ import { UserContext } from "../contexts/UserContext";
 import { notify } from "../utils/otherUtils";
 import { ToastContainer } from "react-toastify";
 
-const PostComment = ({ values: [comments, setComments] }) => {
+const PostComment = () => {
   const { id } = useParams();
   const { user } = useContext(UserContext);
 
@@ -19,9 +19,15 @@ const PostComment = ({ values: [comments, setComments] }) => {
     setComment("");
 
     postComment(id, newComment)
-      .then(() => notify("your message has been posted successfully!"))
+      .then(() =>
+        notify("your message has been posted successfully!", {
+          type: "success",
+        })
+      )
       .catch((err) => {
-        notify(`Oops, something went wrong! ${err.response.data.msg}`);
+        notify(`Oops, something went wrong! ${err.response.data.msg}`, {
+          type: "error",
+        });
       });
   }
 
@@ -47,7 +53,7 @@ const PostComment = ({ values: [comments, setComments] }) => {
           <RiSendPlaneFill className=" text-[#0540F2]" />
         </button>
       </form>
-      <ToastContainer />
+      <ToastContainer position="top-center" theme="colored" />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Outlet, useParams } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../../src/components/Header";
 
 const HomePage = () => {
   const { username } = useParams();

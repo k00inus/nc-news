@@ -11,13 +11,13 @@ header {
 }
 
 .dropbtn {
-  background-color: #0540f2;
   color: white;
-  padding: 10px 16px;
+  padding: 7px 13px;
   font-size: 16px;
   border: none;
   cursor: pointer;
   min-width: 90px;
+  border-radius: 6px;
 }
 
 .dropdown {
@@ -28,30 +28,31 @@ header {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #8daef2;
+  background-color: #0540f2;
   min-width: 90px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
 .link {
-  color: #0540f2;
+  color: white;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
 .link:hover {
-  background-color: #0540f2;
-  color: white;
+  background-color: #8daef2;
+  color: #0540f2;
 }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
+  background-color: #0540f2;
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #8daef2;
-  color: #0540f2;
+  background-color: #0540f2;
+  color: white;
 }

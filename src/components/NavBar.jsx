@@ -10,7 +10,7 @@ const NavBar = () => {
       {
         <>
           <div className="flex flex-col w-full text-center"></div>
-          {loggedIn ? (
+          {loggedIn && user !== undefined ? (
             <>
               <p className=" text-base text-[#0540F2] text-center">
                 Logged in as {user}

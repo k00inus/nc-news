@@ -85,7 +85,9 @@ const CommentList = () => {
         </>
       ) : (
         <article className="w-8/12 mx-auto p-4 shadow-lg rounded-md">
-          <h2>You must be logged in to read comments</h2>
+          <h2 className="text-center">
+            You must be logged in to read comments
+          </h2>
         </article>
       )}
     </div>

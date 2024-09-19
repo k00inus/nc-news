@@ -46,9 +46,7 @@ const Article = () => {
           ) : article ? (
             loggedIn ? (
               <SingleArticle values={[article, setArticle]} />
-            ) : (
-              <p className=""> You must be logged in to view this page!</p>
-            )
+            ) : null
           ) : (
             <Loading />
           )}

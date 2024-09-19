@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { getCommentsByArticleId } from "../utils/utils";
-import { timeAgo } from "../utils/otherUtils";
+import { notify, timeAgo } from "../utils/otherUtils";
 import { useParams } from "react-router-dom";
 import PostComment from "./PostComment";
 import { UserContext } from "../contexts/UserContext";
@@ -11,6 +11,7 @@ import { deleteComment } from "../utils/utils";
 const CommentList = () => {
   const { loggedIn, user } = useContext(UserContext);
   const [comments, setComments] = useState([]);
+  const [disabled, setDisabled] = useState(false);
   const [commentError, setCommentError] = useState([]);
   const { id } = useParams();
 
@@ -26,10 +27,18 @@ const CommentList = () => {
 
   function handleDelete(id) {
     const confirm = window.confirm("Do you want to delete this comment?");
+
     if (confirm) {
-      deleteComment(id).catch((err) => {
-        alert(err.response.data.msg);
-      });
+      setDisabled(true);
+      deleteComment(id)
+        .then(() => {
+          notify("your message has been deleted", { type: "info" });
+          setDisabled(false);
+        })
+        .catch((err) => {
+          notify(err.response.data.msg, { type: "error" });
+          setDisabled(false);
+        });
     }
   }
 
@@ -62,6 +71,7 @@ const CommentList = () => {
                     <button
                       className="bg-[#0540F2] hover:bg-[#8DAEF2] hover:text-[#0540F2] py-1 px-2 rounded-md text-white"
                       onClick={(e) => handleDelete(comment.comment_id)}
+                      disabled={disabled}
                     >
                       Delete
                     </button>

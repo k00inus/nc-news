@@ -1,21 +1,15 @@
-import { useContext } from "react";
 import Articles from "../components/Articles";
 import Header from "../components/Header";
-import { UserContext } from "../contexts/UserContext";
+import NavBar from "../components/NavBar";
 
 const Home = () => {
-  const { loggedIn, setLoggedIn } = useContext(UserContext);
-
   return (
     <>
-      {loggedIn ? (
+      <Header />
+      <main className="flex relative">
+        <NavBar />
         <Articles />
-      ) : (
-        <>
-          <Header />
-          <Articles />
-        </>
-      )}
+      </main>
     </>
   );
 };

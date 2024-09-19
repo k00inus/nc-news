@@ -1,47 +1,33 @@
-import { Link, useParams } from "react-router-dom";
-import Users from "./Users";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import Topics from "./Topics";
 
 const NavBar = () => {
-  const { loggedIn, setLoggedIn } = useContext(UserContext);
-  const { username } = useParams();
+  const { loggedIn, user } = useContext(UserContext);
+  console.log(user, "user");
+  console.log(loggedIn);
+
   return (
-    <div className=" bg-[#8DAEF2] font-bold flex space-x-2 p-3 px-24 justify-between">
-      {loggedIn & (username !== undefined) ? (
+    <div className="fixed font-bold flex space-x-2  px-2 flex-col w-1/6">
+      {
         <>
-          <Link
-            className="text-xl hover:text-[#0540F2]"
-            to={`/pages/homepage/${username}`}
-          >
-            Dashboard
-          </Link>
-          <div className="flex w-1/4 justify-between">
-            <p className=" text-sm mr-4 self-end text-[#0540F2]">
-              Logged in as {username}
-            </p>
-            <Link className="text-xl hover:text-[#0540F2]" to="#">
-              Profile
-            </Link>
-            <Link
-              className="text-xl hover:text-[#0540F2]"
-              to="/"
-              onClick={() => {
-                setLoggedIn(false);
-              }}
-            >
-              Logout
-            </Link>
-          </div>
+          <div className="flex flex-col w-full text-center"></div>
+          {loggedIn ? (
+            <>
+              <p className=" text-base text-[#0540F2] text-center">
+                Logged in as {user}
+              </p>
+              <div className=" text-[#0540F2] text-center mt-5">
+                <Topics />
+              </div>
+            </>
+          ) : (
+            <div className=" text-[#0540F2] text-center mt-5">
+              <Topics />
+            </div>
+          )}
         </>
-      ) : (
-        <>
-          <Link className="text-xl hover:text-[#0540F2]" to="/">
-            Home
-          </Link>
-          <Users />
-        </>
-      )}
+      }
     </div>
   );
 };

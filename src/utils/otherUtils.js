@@ -1,3 +1,9 @@
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+export const notify = (message) => {
+  toast(message);
+};
 export const timeAgo = (timestamp) => {
   const time = new Date(timestamp);
 

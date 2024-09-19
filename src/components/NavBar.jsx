@@ -4,8 +4,6 @@ import Topics from "./Topics";
 
 const NavBar = () => {
   const { loggedIn, user } = useContext(UserContext);
-  console.log(user, "user");
-  console.log(loggedIn);
 
   return (
     <div className="fixed font-bold flex space-x-2  px-2 flex-col w-1/6">

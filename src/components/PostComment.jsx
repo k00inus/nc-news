@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { postComment } from "../utils/utils";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { UserContext } from "../contexts/UserContext";
 
 const PostComment = ({ values: [comments, setComments] }) => {
-  const { id, username } = useParams();
+  const { id } = useParams();
+  const { user } = useContext(UserContext);
 
   const [comment, setComment] = useState("");
-  const [message, setMessage] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newComment = { article_id: id, username: username, body: comment };
+    const newComment = { article_id: id, username: user, body: comment };
 
     setComment("");
     setComments((prevComments) => {
@@ -40,9 +41,6 @@ const PostComment = ({ values: [comments, setComments] }) => {
         <button className="w-7 px-4 self-end mt-2" type="submit">
           <RiSendPlaneFill className=" text-[#0540F2]" />
         </button>
-        {message ? (
-          <em className="text-sm text-[#0540F2] self-center">{message}</em>
-        ) : null}
       </form>
     </div>
   );

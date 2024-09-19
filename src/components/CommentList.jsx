@@ -9,10 +9,10 @@ import Loading from "./Loading";
 import { deleteComment } from "../utils/utils";
 
 const CommentList = () => {
-  const { loggedIn } = useContext(UserContext);
+  const { loggedIn, user } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [commentError, setCommentError] = useState([]);
-  const { id, username } = useParams();
+  const { id } = useParams();
 
   function getComments() {
     getCommentsByArticleId(id)
@@ -58,7 +58,7 @@ const CommentList = () => {
                     {comment.votes}
                     <AiFillDislike className="ml-1 mt-[2px] text-blue-500" />
                   </p>
-                  {loggedIn && username === comment.author ? (
+                  {loggedIn && user === comment.author ? (
                     <button
                       className="bg-[#0540F2] hover:bg-[#8DAEF2] hover:text-[#0540F2] py-1 px-2 rounded-md text-white"
                       onClick={(e) => handleDelete(comment.comment_id)}

@@ -4,10 +4,16 @@ const ncNews = axios.create({
   baseURL: "https://nc-project-pmrs.onrender.com/api",
 });
 
-export const fetchArticles = () => {
-  return ncNews.get("/articles").then(({ data }) => {
-    return data.articles;
-  });
+export const fetchArticles = (topic) => {
+  return ncNews
+    .get("/articles", {
+      params: {
+        topic,
+      },
+    })
+    .then(({ data }) => {
+      return data.articles;
+    });
 };
 
 export const getArticleById = (id) => {
@@ -44,4 +50,10 @@ export const postComment = (id, comment) => {
 
 export const deleteComment = (id) => {
   return ncNews.delete(`/comments/${id}`);
+};
+
+export const fetchTopics = () => {
+  return ncNews.get("/topics").then(({ data }) => {
+    return data.topics;
+  });
 };

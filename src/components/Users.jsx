@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
 const Users = () => {
-  const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const { loggedIn, setLoggedIn, setUser } = useContext(UserContext);
   const [users, setUsers] = useState([]);
+
   useEffect(() => {
     fetchUsers()
       .then((users) => {
@@ -17,23 +18,36 @@ const Users = () => {
   }, []);
 
   return (
-    <div className="dropdown">
-      <button className="dropbtn">Login</button>
-      <div className="dropdown-content">
-        {users.map((user) => (
-          <Link
-            key={user.username}
-            className="link"
-            to={`/pages/homepage/${user.username}`}
-            onClick={() => {
-              setLoggedIn(true);
-            }}
-          >
-            {user.username}
-          </Link>
-        ))}
-      </div>
-    </div>
+    <>
+      {loggedIn ? (
+        <button
+          onClick={() => {
+            setLoggedIn(false);
+            setUser("");
+          }}
+        >
+          Logout
+        </button>
+      ) : (
+        <div className="dropdown">
+          <button className="dropbtn">Login</button>
+          <div className="dropdown-content">
+            {users.map((user) => (
+              <Link
+                key={user.username}
+                className="link"
+                onClick={() => {
+                  setLoggedIn(true);
+                  setUser(user.username);
+                }}
+              >
+                {user.username}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

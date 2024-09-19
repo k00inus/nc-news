@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { postComment } from "../utils/utils";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { UserContext } from "../contexts/UserContext";
+import { notify } from "../utils/otherUtils";
+import { ToastContainer } from "react-toastify";
 
 const PostComment = ({ values: [comments, setComments] }) => {
   const { id } = useParams();
@@ -15,13 +17,12 @@ const PostComment = ({ values: [comments, setComments] }) => {
     const newComment = { article_id: id, username: user, body: comment };
 
     setComment("");
-    setComments((prevComments) => {
-      [...prevComments, comment];
-    });
 
-    postComment(id, newComment).catch((err) => {
-      alert(err.response.data.msg);
-    });
+    postComment(id, newComment)
+      .then(() => notify("your message has been posted successfully!"))
+      .catch((err) => {
+        notify(`Oops, something went wrong! ${err.response.data.msg}`);
+      });
   }
 
   return (
@@ -38,10 +39,15 @@ const PostComment = ({ values: [comments, setComments] }) => {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         ></textarea>
-        <button className="w-7 px-4 self-end mt-2" type="submit">
+        <button
+          className="w-7 px-4 self-end mt-2"
+          type="submit"
+          disabled={comment === ""}
+        >
           <RiSendPlaneFill className=" text-[#0540F2]" />
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

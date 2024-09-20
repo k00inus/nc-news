@@ -52,7 +52,7 @@ const Article = () => {
             <Loading />
           )}
 
-          {isLoading ? null : <CommentList />}
+          {isLoading ? null : error.length > 0 ? null : <CommentList />}
         </main>
         <Filters />
       </div>

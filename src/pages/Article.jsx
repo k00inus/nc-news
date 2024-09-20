@@ -38,7 +38,9 @@ const Article = () => {
     <>
       <Header />
       <div className="flex relative">
-        <NavBar />
+        <div className="w-1/6 h-[100vh] relative">
+          <NavBar />
+        </div>
         <main className="w-[45%] mx-auto">
           {isLoading ? (
             <Loading />

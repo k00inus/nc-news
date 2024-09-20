@@ -52,7 +52,7 @@ const CommentList = () => {
             comments.map((comment) => (
               <article
                 key={comment.comment_id}
-                className="w-8/12 mx-auto p-4 shadow-lg rounded-md"
+                className="w-full mx-auto p-4 shadow-lg rounded-md"
               >
                 <div className="flex text-gray-500 text-sm">
                   <p className="font-bold mr-3">{comment.author}</p>

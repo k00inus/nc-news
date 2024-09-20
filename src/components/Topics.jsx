@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchTopics } from "../utils/utils";
 import { Link } from "react-router-dom";
+import { notify } from "../utils/otherUtils";
 
 const Topics = () => {
   const [topics, setTopics] = useState([]);
@@ -11,7 +12,7 @@ const Topics = () => {
         setTopics(topics);
       })
       .catch((err) => {
-        setError(err.response.data.msg);
+        notify(err.response.data.msg, { type: "error" });
       });
   }, []);
 

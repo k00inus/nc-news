@@ -9,6 +9,7 @@ import NavBar from "../components/NavBar";
 import SingleArticle from "../components/SingleArticle";
 import Header from "../components/Header";
 import Filters from "../components/Filters";
+import Footer from "../components/Footer";
 
 const Article = () => {
   const [article, setArticle] = useState({});
@@ -58,6 +59,7 @@ const Article = () => {
         </main>
         <Filters />
       </div>
+      <Footer />
     </>
   );
 };

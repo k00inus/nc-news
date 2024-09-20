@@ -9,6 +9,7 @@ import Filters from "../components/Filters";
 import NavBar from "../components/NavBar";
 import { notify } from "../utils/otherUtils";
 import { ToastContainer } from "react-toastify";
+import Footer from "../components/Footer";
 
 const TopicsPage = () => {
   const [articles, setArticles] = useState([]);
@@ -48,6 +49,7 @@ const TopicsPage = () => {
         </main>
         <Filters />
       </div>
+      <Footer />
     </>
   );
 };

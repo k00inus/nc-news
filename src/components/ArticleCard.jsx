@@ -8,7 +8,7 @@ const ArticleCard = ({ articles }) => {
       {articles.map((article) => (
         <article
           key={article.article_id}
-          className="border-b-4 w-[100%] p-3 shadow-lg rounded-lg hover:bg-slate-100 "
+          className="w-[100%] p-3 shadow-lg rounded-lg hover:bg-slate-100  my-1"
         >
           <Link to={`/article/${article.article_id}`}>
             <p className="text-xs font-bold text-gray-500">#{article.topic}</p>

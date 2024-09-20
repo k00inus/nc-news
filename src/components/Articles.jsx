@@ -24,7 +24,7 @@ const Articles = () => {
   }, [sort_by, order]);
 
   return (
-    <main className="w-[35%] border">
+    <main className="w-[35%]">
       {topic ? (
         <TopicsPage />
       ) : articles.length === 0 ? (

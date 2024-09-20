@@ -6,7 +6,7 @@ const NavBar = () => {
   const { loggedIn, user } = useContext(UserContext);
 
   return (
-    <div className="font-bold flex space-x-2  px-2 flex-col w-1/6">
+    <div className="font-bold flex space-x-2  px-2 flex-col w-1/6 fixed">
       {
         <>
           <div className="flex flex-col w-full text-center"></div>

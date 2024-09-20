@@ -8,7 +8,9 @@ const Home = () => {
     <>
       <Header />
       <main className="flex justify-between">
-        <NavBar />
+        <div className="w-1/6 h-[100vh] relative">
+          <NavBar />
+        </div>
 
         <Articles />
         <Filters />

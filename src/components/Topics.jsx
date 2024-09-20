@@ -30,7 +30,7 @@ const Topics = () => {
               <li key={topic.slug} className="">
                 <Link
                   className="hover:bg-[#0540F2] hover:text-white"
-                  to={`/topic/${topic.slug}`}
+                  to={`/topics/${topic.slug}`}
                 >
                   {topic.slug}
                 </Link>

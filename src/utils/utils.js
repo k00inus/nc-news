@@ -4,7 +4,20 @@ const ncNews = axios.create({
   baseURL: "https://nc-project-pmrs.onrender.com/api",
 });
 
-export const fetchArticles = (topic) => {
+export const fetchArticles = (sort_by, order) => {
+  return ncNews
+    .get("/articles", {
+      params: {
+        sort_by,
+        order,
+      },
+    })
+    .then(({ data }) => {
+      return data.articles;
+    });
+};
+
+export const fetchArticlesByTopic = (topic) => {
   return ncNews
     .get("/articles", {
       params: {

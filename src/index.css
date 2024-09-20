@@ -56,3 +56,47 @@ header {
   background-color: #0540f2;
   color: white;
 }
+
+.dropbtn-sort {
+  color: #0540f2;
+  padding: 7px 13px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  min-width: 90px;
+  border-radius: 6px;
+}
+
+.dropdown-sort {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content-sort {
+  display: none;
+  position: absolute;
+  width: max-content;
+  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+  z-index: 1;
+}
+
+.link-sort {
+  color: #0540f2;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.link-sort:hover {
+  background-color: #8daef2;
+  color: #0540f2;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown-sort:hover .dropdown-content-sort {
+  display: block;
+}
+
+.dropdown-sort:hover .dropbtn-sort {
+  color: #0540f2;
+}

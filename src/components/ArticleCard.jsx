@@ -1,17 +1,14 @@
-import { UserContext } from "../contexts/UserContext";
-import { useContext } from "react";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { timeAgo } from "../utils/otherUtils";
 
 const ArticleCard = ({ articles }) => {
-  const { loggedIn } = useContext(UserContext);
   return (
     <>
       {articles.map((article) => (
         <article
           key={article.article_id}
-          className="border-b-4 w-7/12 mx-auto p-3 shadow-lg rounded-lg hover:bg-slate-100 "
+          className="border-b-4 w-[100%] p-3 shadow-lg rounded-lg hover:bg-slate-100 "
         >
           <Link to={`/article/${article.article_id}`}>
             <p className="text-xs font-bold text-gray-500">#{article.topic}</p>

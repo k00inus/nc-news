@@ -35,10 +35,10 @@ const PostComment = () => {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="w-8/12 mx-auto p-4 shadow-lg rounded-md flex flex-col"
+        className="w-full mx-auto p-4 shadow-lg rounded-md flex flex-col"
       >
         <textarea
-          className="w-full placeholder:italic placeholder:text-slate-400 px-3 h-10 bg-slate-100 focus:bg-white"
+          className="w-full placeholder:italic placeholder:text-slate-400 px-3 h-10 rounded-md bg-slate-100 focus:bg-white"
           placeholder="Add a comment..."
           aria-label="add a comment"
           name="comment"

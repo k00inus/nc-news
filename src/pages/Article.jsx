@@ -8,6 +8,7 @@ import { UserContext } from "../contexts/UserContext";
 import NavBar from "../components/NavBar";
 import SingleArticle from "../components/SingleArticle";
 import Header from "../components/Header";
+import Filters from "../components/Filters";
 
 const Article = () => {
   const [article, setArticle] = useState({});
@@ -38,7 +39,7 @@ const Article = () => {
       <Header />
       <div className="flex relative">
         <NavBar />
-        <main className="w-9/12 mx-auto">
+        <main className="w-[45%] mx-auto">
           {isLoading ? (
             <Loading />
           ) : error.length > 0 ? (
@@ -46,15 +47,14 @@ const Article = () => {
           ) : article ? (
             loggedIn ? (
               <SingleArticle values={[article, setArticle]} />
-            ) : (
-              <p className=""> You must be logged in to view this page!</p>
-            )
+            ) : null
           ) : (
             <Loading />
           )}
 
           {isLoading ? null : <CommentList />}
         </main>
+        <Filters />
       </div>
     </>
   );

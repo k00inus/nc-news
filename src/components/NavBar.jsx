@@ -6,11 +6,11 @@ const NavBar = () => {
   const { loggedIn, user } = useContext(UserContext);
 
   return (
-    <div className="fixed font-bold flex space-x-2  px-2 flex-col w-1/6">
+    <div className="font-bold flex space-x-2  px-2 flex-col w-1/6">
       {
         <>
           <div className="flex flex-col w-full text-center"></div>
-          {loggedIn ? (
+          {loggedIn && user ? (
             <>
               <p className=" text-base text-[#0540F2] text-center">
                 Logged in as {user}

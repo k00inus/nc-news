@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
 const Users = () => {
-  const { loggedIn, setLoggedIn, setUser } = useContext(UserContext);
+  const { loggedIn, setLoggedIn, setUser, user } = useContext(UserContext);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
